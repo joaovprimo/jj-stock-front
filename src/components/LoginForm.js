@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { useState, useContext } from 'react';
 import { postLogin } from '../axios/axios.js';
 import UserContext from '../context/context.js';
+import { RotatingLines } from 'react-loader-spinner';
 
 export default function LoginForm(){
     const [login, setLogin] = useState({ cnpj:"", password:""});
     const [disableForm, setDisableForm] = useState(false);
+    const [ failed, setFailed ] = useState(false);
 
     const { store, setStore } = useContext(UserContext);
 
@@ -14,14 +16,16 @@ export default function LoginForm(){
     }
 
    async function loginStore(){
-        setDisableForm(!disableForm);
+        setDisableForm(true);
         try{
            const log = await postLogin(login);
-           console.log(log);
-            //localStorage.setItem('token', log.token);
-            //setStore(log.token)
+           console.log(log.data);
+            localStorage.setItem('token', log.data.token);
+            setStore(log.data.store);
+            setDisableForm(false);
         }catch(error){
-        alert(error.response.data)
+        setDisableForm(false);
+        setFailed(true);
         }
     }
 
@@ -33,11 +37,26 @@ export default function LoginForm(){
         </Login>
           <Form onSubmit={submitLogin}>
           <FormLogin>
+            {
+            failed ? 
+            <><p> CNPJ ou SENHA incorretos! </p></> 
+            :
+            <></>
+            }
             <Input type="text" placeholder='cpnj' onChange={event => setLogin({...login, cnpj: event.target.value})} disabled={disableForm} required />
-            <Input type="text" placeholder='password' onChange={event => setLogin({...login, password: event.target.value})} disabled={disableForm} required />
+            <Input type="text" placeholder='senha' onChange={event => setLogin({...login, password: event.target.value})} disabled={disableForm} required />
             </FormLogin>
             <Submit type="submit" disabled={disableForm} onClick={loginStore}>
-              <p>Login</p>
+              {
+              disableForm == false ? <p>Login</p> :
+              <RotatingLines
+                strokeColor="white"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="30"
+                visible={true}
+              />
+              }
             </Submit>
           </Form>
         </SpaceLogin>
@@ -79,6 +98,11 @@ const FormLogin = styled.div`
 display:flex;
 flex-direction:column;
 justify-content:space-evenly;
+p{
+  color:red;
+  font-size:25px;
+  text-align:center;
+}
 `
 
 const Submit = styled.div`
