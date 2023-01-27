@@ -1,8 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalStyle from "../style/style.js";
-import LoginPage from "../pages/LoginPage.js";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import GlobalStyle from '../style/style.js';
+import LoginPage from '../pages/LoginPage.js';
 import UserContext from '../context/context.js';
-import { useState } from "react";
+import PrivatePage from '../private/privatePage.js';
+import { useState } from 'react';
+import Main from '../pages/Main.js';
 
 export default function App() {
   const [store, setStore] = useState("");
@@ -16,6 +18,9 @@ export default function App() {
    }}>
       <Routes>
         <Route path="/" element={<LoginPage/>}/>
+        <Route path="/main" element={ <PrivatePage>
+                                    <Main/>
+                                    </PrivatePage>}/>
       </Routes>
       </UserContext.Provider>
    </BrowserRouter>

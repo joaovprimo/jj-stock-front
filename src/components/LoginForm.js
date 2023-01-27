@@ -3,13 +3,14 @@ import { useState, useContext } from 'react';
 import { postLogin } from '../axios/axios.js';
 import UserContext from '../context/context.js';
 import { RotatingLines } from 'react-loader-spinner';
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm(){
     const [login, setLogin] = useState({ cnpj:"", password:""});
     const [disableForm, setDisableForm] = useState(false);
     const [ failed, setFailed ] = useState(false);
-
-    const { store, setStore } = useContext(UserContext);
+    const { setStore } = useContext(UserContext);
+    const navigate = useNavigate();
 
     function submitLogin(e){
         e.preventDefault();
@@ -18,14 +19,15 @@ export default function LoginForm(){
    async function loginStore(){
         setDisableForm(true);
         try{
-           const log = await postLogin(login);
-           console.log(log.data);
-            localStorage.setItem('token', log.data.token);
-            setStore(log.data.store);
-            setDisableForm(false);
+          const log = await postLogin(login);
+          console.log(log.data);
+          localStorage.setItem("token", log.data.token);
+          setStore(log.data.store);
+          setDisableForm(false);
+          navigate("/main");
         }catch(error){
-        setDisableForm(false);
-        setFailed(true);
+          setDisableForm(false);
+          setFailed(true);
         }
     }
 
@@ -71,6 +73,7 @@ justify-content:center;
 align-items: center;
 width:495px;
 height:380px;
+background-color:#F5F5F5;
 `
 const Form = styled.form`
 `
