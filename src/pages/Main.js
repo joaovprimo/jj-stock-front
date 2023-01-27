@@ -3,15 +3,15 @@ import SideBar from "../components/SideBar.js";
 import styled from "styled-components";
 import UserContext from "../context/context.js";
 import { useContext } from "react";
+import Container2 from "../components/Container2.js";
 
 export default function Main (){
     const { store } = useContext(UserContext);
-    console.log(store);
+    
     return(
         <>
         <Top/>
           <Container2>
-           <SideBar/>
            <Content>
             <Profile> Profile </Profile>
             <InfoStore>
@@ -25,18 +25,9 @@ export default function Main (){
     );
 }
 
-const Container2 = styled.div`
-display:flex;
-align-items:center;
-justify-content:flex-start;
-background-color:#F3F9FB;
-width:100vw;
-height:100vh;
-`;
 
 const Content = styled.div`
 margin-top:40px;
-margin-left: 50px;
 width: 100vw;
 height:100vh;
 `
