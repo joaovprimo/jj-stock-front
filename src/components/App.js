@@ -9,13 +9,14 @@ import Providers from '../pages/Providers.js';
 
 export default function App() {
   const [store, setStore] = useState("");
+  const [provider, setProvider] = useState("");
   return (
    <>
    <GlobalStyle/>
    <BrowserRouter>
    <UserContext.Provider
    value={{
-    store, setStore
+    store, setStore, provider, setProvider
    }}>
       <Routes>
         <Route path="/" element={<LoginPage/>}/>

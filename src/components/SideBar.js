@@ -7,7 +7,7 @@ export default function SideBar(){
     return (
         <>
         <BarSide>
-        <Button> <ImHome/> <p>Início</p> </Button>
+        <Button onClick={()=>navigate("/main")}> <ImHome/> <p>Início</p> </Button>
         <Button> <ImBook/> <p>Estoque</p> </Button>
         <Button> <ImBarcode/> <p>Produtos</p> </Button>
         <Button onClick={()=>navigate("/providers")}> <ImUsers/> <p>Fornecedores</p> </Button>

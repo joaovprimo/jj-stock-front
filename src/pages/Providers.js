@@ -2,23 +2,57 @@ import styled from "styled-components";
 import Top from "../components/Top.js";
 import Container2 from "../components/Container2.js";
 import ProvidersInfos from "../components/ProvidersInfo.js";
+import { useEffect, useContext } from "react";
+import UserContext from "../context/context.js";
+import { getProvider } from "../axios/axios.js";
+import { ImSearch } from "react-icons/im";
 
 export default function Providers (){
-    return(
+  const { provider, setProvider } = useContext(UserContext);
+
+  useEffect(()=>{
+      const promisse = getProvider();
+      promisse.then(
+        (res)=> {
+          setProvider(res.data)
+          console.log(res.data);
+        }
+      ).catch((error)=>{
+        console.log(error.message);
+      });
+  },[])
+
+  return(
         <>
         <Top/>
         <Container2>
         <Content>
-        <Provider> Profile </Provider>
+        <SubContent>
+        <Provider> Fornecedores </Provider>
+        <Search>
+        <ImSearch/>
+        </Search>
+        </SubContent>
           <Menu2>
             <TopProviders>
               <Topname><p>Name</p></Topname>
               <Topcnpj><p>CNPJ</p></Topcnpj>
               <Topemail><p>Email</p></Topemail>
             </TopProviders>
-            <ProvidersInfos>
+            {provider.length === 0 ? 
+            <></>
+            :
+            (provider.map((providers,index)=>(
+              <ProvidersInfos 
+                key={index}
+                name={providers.name}
+                email={providers.email}
+                cnpj={providers.cnpj}
+                />
+            )
+            )
+            )}
 
-            </ProvidersInfos>
           </Menu2>
         </Content>
         </Container2>
@@ -89,4 +123,11 @@ p{
     line-height: 24px;
     color: #495D69;
 }
+`
+const SubContent = styled.div`
+display:flex;
+`
+const Search = styled.div`
+margin-left:1305px;
+font-size: 32px;
 `

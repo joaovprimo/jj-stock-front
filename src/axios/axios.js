@@ -18,4 +18,10 @@ async function postLogin (form){
     return promise;
 }
 
-export { postLogin }
+async function getProvider (){
+    const config = createHearders();
+    const promise = await axios.get(`${base_Url}/providers`, config);
+    return promise;
+}
+
+export { postLogin, getProvider }
