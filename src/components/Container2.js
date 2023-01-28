@@ -19,4 +19,6 @@ justify-content:flex-start;
 background-color:#F3F9FB;
 width:100vw;
 height:100vh;
+//overflow:hidden;
+box-sizing:border-box;
 `;

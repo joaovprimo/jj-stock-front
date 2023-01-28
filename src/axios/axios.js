@@ -24,4 +24,22 @@ async function getProvider (){
     return promise;
 }
 
-export { postLogin, getProvider }
+async function getProviderBy(data){
+    const config = createHearders();
+    const promise = await axios.get(`${base_Url}/providers/findone?cnpj=${data}`,config);
+    return promise;
+}
+
+async function createProvider(data){
+    const config = createHearders();
+    const promise = await axios.post(`${base_Url}/providers/`, data ,config);
+    return promise;
+}
+
+async function deleteProvider(id){
+    const config = createHearders();
+    const promise = await axios.delete(`${base_Url}/providers/${id}`,config);
+    return promise;
+}
+
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider }

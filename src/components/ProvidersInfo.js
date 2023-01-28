@@ -1,18 +1,29 @@
 import styled from "styled-components";
 import { ImBin, ImPencil } from "react-icons/im";
+import {deleteProvider} from "../axios/axios.js";
+import { useContext } from "react";
+import UserContext from "../context/context.js";
 
-export default function ProvidersInfos({name, email, cnpj}){
-    console.log(name, email, cnpj)
+export default function ProvidersInfos({id, name, email, cnpj}){
+    const { provider, setProvider } = useContext(UserContext);
+    async function deleteProv(id){
+        try{
+            const prov = await deleteProvider(id);
+            setProvider(prov.data);
+        }catch(error){
+            alert("Não Foi possivel deletar este fornecedor!")
+        }
+    }
     return(
         <>
         <ProvidersInfoss>
             <Icons>
            <P4><ImPencil/></P4>
-           <P5><ImBin/></P5>
+           <P5 onClick={()=>deleteProv(id)}><ImBin/></P5>
            </Icons>
            <P1><p>{name}</p></P1>
-           <P2><p>{email}</p></P2>
-           <P3><p>{cnpj}</p></P3>
+           <P2><p>{cnpj}</p></P2>
+           <P3><p>{email}</p></P3>
         </ProvidersInfoss>
         </>
     )
@@ -42,7 +53,7 @@ p{
 `
 const P2 = styled.div`
 font-size:20px;
-width:30%;
+width:15%;
 display:flex;
 p{
     margin-left:130px;
@@ -51,7 +62,7 @@ p{
 `
 const P3 = styled.div`
 font-size:20px;
-width:30%;
+width:45%;
 display:flex;
 p{
   margin-left:180px;
