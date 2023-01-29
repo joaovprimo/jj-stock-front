@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function Providers (){
   const { provider, setProvider } = useContext(UserContext);
   const [findProvider, setFindProvider] = useState("");
-  const [modalOpened, setModalOpened] = useState(true);
+  const [modalOpened, setModalOpened] = useState(false);
   const [disableForm, setDisableForm] = useState(false);
   const [insertProvider, setInsertProvider] = useState({name:"", email:"", cnpj:""});
 
