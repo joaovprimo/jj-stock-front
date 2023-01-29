@@ -6,6 +6,7 @@ import PrivatePage from '../private/privatePage.js';
 import { useState } from 'react';
 import Main from '../pages/Main.js';
 import Providers from '../pages/Providers.js';
+import Products from '../pages/Products.js';
 
 export default function App() {
   const [store, setStore] = useState("");
@@ -25,11 +26,15 @@ export default function App() {
                                     </PrivatePage>}/>
         <Route path="/providers" element={ <PrivatePage>
                                     <Providers/>
-                                    </PrivatePage>}/>                                  
+                                    </PrivatePage>}/> 
+        <Route path="/products" element={ <PrivatePage>
+                                    <Products/>
+                                    </PrivatePage>}/>                                                              
       </Routes>
       </UserContext.Provider>
    </BrowserRouter>
    </>
   );
 }
+
 

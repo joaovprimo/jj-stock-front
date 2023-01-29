@@ -7,7 +7,6 @@ import UserContext from "../context/context.js";
 import { getProvider, getProviderBy, createProvider } from "../axios/axios.js";
 import { ImSearch } from "react-icons/im";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
 export default function Providers (){
   const { provider, setProvider } = useContext(UserContext);
