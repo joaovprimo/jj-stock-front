@@ -4,7 +4,7 @@ import Container2 from "../components/Container2.js";
 import ProvidersInfos from "../components/ProvidersInfo.js";
 import { useEffect, useContext, useState } from "react";
 import UserContext from "../context/context.js";
-import { getProvider, getProviderBy } from "../axios/axios.js";
+import { getProvider, getProviderBy, createProvider } from "../axios/axios.js";
 import { ImSearch } from "react-icons/im";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,8 @@ export default function Providers (){
   const { provider, setProvider } = useContext(UserContext);
   const [findProvider, setFindProvider] = useState("");
   const [modalOpened, setModalOpened] = useState(true);
+  const [disableForm, setDisableForm] = useState(false);
+  const [insertProvider, setInsertProvider] = useState({name:"", email:"", cnpj:""});
 
   useEffect(()=>{
       const promisse = getProvider();
@@ -40,6 +42,20 @@ export default function Providers (){
     }
   }
 
+  async function createProviderr(){
+    setDisableForm(true);
+    try{  
+      const provider = await createProvider(insertProvider);
+      setProvider(provider.data);
+      setDisableForm(false);
+      setModalOpened(false);
+    }catch(error){
+      console.log(error.message);
+      setDisableForm(false);
+      alert("Não foi possível criar o fornecedor, verifique as informações");
+    }
+  }
+
   return(
         <>
         {
@@ -50,8 +66,15 @@ export default function Providers (){
             <Content>
               <Provider> Fornecedores </Provider>
               <Menu3>
-                <CreateForm>
-
+                <CreateForm onSubmit={submitSearch}>
+                <Provider><p>Adicionar Fornecedor</p></Provider>
+                <Input type="text" placeholder="Nome" onChange={event => setInsertProvider({...insertProvider, name: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Email" onChange={event => setInsertProvider({...insertProvider, email: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="CNPJ" onChange={event => setInsertProvider({...insertProvider, cnpj: event.target.value})} disable={disableForm} required/>
+                <DivBut>
+                <Save type="submit" disable={disableForm} onClick={createProviderr}><p>Salvar</p></Save>
+                <Cancel type="submit" disable={disableForm} onClick={()=> setModalOpened(false)}><p>Cancelar</p></Cancel>
+                </DivBut>
                 </CreateForm>
               </Menu3>
             </Content> 
@@ -71,7 +94,7 @@ export default function Providers (){
         </SubContent>
           <Menu2>
             <TopProviders>
-              <p><BsFillPlusCircleFill /></p>
+              <p><BsFillPlusCircleFill onClick={()=> setModalOpened(true)}/></p>
               <Topname><p>Name</p></Topname>
               <Topcnpj><p>CNPJ</p></Topcnpj>
               <Topemail><p>Email</p></Topemail>
@@ -135,6 +158,9 @@ p{
   margin-left:35px;
   font-size:40px;
   color: #495D69;
+  &:hover{
+  cursor: pointer;
+}
 }
 `
 
@@ -197,18 +223,79 @@ padding:15px;
 const Undo = styled.p`
 `
 
-const CreateForm = styled.div`
+const CreateForm = styled.form`
 width:400px;
 height:500px;
-background-color:red;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+border-radius: 10px 10px 10px 10px;
+background-color:#FFFFFF;
+display:flex;
+flex-direction:column;
+align-items:center;
+p{
+  margin-top:10px;
+}
 `
 
 const Menu3 = styled.div`
-background-color: #FFFFFE;
 min-width: 1200px;
 min-height: 600px;
 display:flex;
 justify-content:center;
 align-items:center;
 border-radius: 10px 10px 0px 0px;
+`
+
+const Input = styled.input`
+width:300px;
+height:50px;
+margin-bottom:15px;
+border-radius: 5px 5px 5px 5px;
+padding:10px;
+font-size:20px;
+`
+
+const Cancel = styled.button`
+width:180px;
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius: 5px 5px 5px 5px;
+p{
+  font-size:22px;
+  text-align:center;
+}
+&:hover{
+  cursor: pointer;
+  background-color:#FF0000;
+  font-weight:700;
+}
+`;
+
+const Save = styled.button`
+width:180px;
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius: 5px 5px 5px 5px;
+p{
+  font-size:22px;
+  text-align:center;
+}
+&:hover{
+  cursor: pointer;
+  background-color:#32CD32;
+  font-weight:700;
+}
+`;
+
+const DivBut = styled.div`
+height:200px;
+margin-top:5px;
+display:flex;
+flex-direction:column;
+justify-content: space-around;
+
 `
