@@ -11,13 +11,14 @@ import Products from '../pages/Products.js';
 export default function App() {
   const [store, setStore] = useState("");
   const [provider, setProvider] = useState("");
+  const [product, setProduct] = useState("");
   return (
    <>
    <GlobalStyle/>
    <BrowserRouter>
    <UserContext.Provider
    value={{
-    store, setStore, provider, setProvider
+    store, setStore, provider, setProvider, product, setProduct
    }}>
       <Routes>
         <Route path="/" element={<LoginPage/>}/>

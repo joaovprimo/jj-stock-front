@@ -98,6 +98,7 @@ export default function Providers (){
               <Topcnpj><p>CNPJ</p></Topcnpj>
               <Topemail><p>Email</p></Topemail>
             </TopProviders>
+            <MenuInfo>
             {provider.length === 0 ? 
             <></>
             :
@@ -111,7 +112,7 @@ export default function Providers (){
             )
             )
             )}
-
+            </MenuInfo>
           </Menu2>
         </Content>
         </Container2>
@@ -138,7 +139,7 @@ margin-bottom:50px;
 const Menu2 = styled.div`
 background-color: #FFFFFE;
 min-width: 1200px;
-min-height: 600px;
+height: 600px;
 display:flex;
 flex-direction:column;
 align-items:space-around;
@@ -153,6 +154,7 @@ background-color: #E7EFF3;
 border-radius: 10px 10px 0px 0px;
 display:flex;
 align-items:center;
+position:relative;
 p{
   margin-left:35px;
   font-size:40px;
@@ -297,4 +299,9 @@ display:flex;
 flex-direction:column;
 justify-content: space-around;
 
+`;
+
+const MenuInfo = styled.div`
+overflow-y:scroll;
+width:100%;
 `

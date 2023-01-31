@@ -42,4 +42,17 @@ async function deleteProvider(id){
     return promise;
 }
 
-export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider }
+async function getProducts(stock){
+    console.log(stock)
+    const config = createHearders();
+    const promise = await axios.get(`${base_Url}/products/${stock}`, config);
+    return promise;
+}
+
+async function deleteProduct(id){
+    const config = createHearders();
+    const promise = await axios.delete(`${base_Url}/products/${id}`,config);
+    return promise;
+}
+
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct }
