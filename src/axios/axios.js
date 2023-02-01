@@ -18,9 +18,10 @@ async function postLogin (form){
     return promise;
 }
 
-async function getProvider (){
+async function getProvider (storesId){
+    console.log(storesId);
     const config = createHearders();
-    const promise = await axios.get(`${base_Url}/providers`, config);
+    const promise = await axios.get(`${base_Url}/providers/${storesId}`,config);
     return promise;
 }
 
@@ -55,4 +56,12 @@ async function deleteProduct(id){
     return promise;
 }
 
-export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct }
+async function createEntry(stock, data){
+    console.log(stock)
+    const config = createHearders();
+    const promise = await axios.post(`${base_Url}/entry/${stock}`, data, config);
+    return promise;
+}
+
+
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry }

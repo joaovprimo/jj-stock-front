@@ -7,11 +7,12 @@ import { useState } from 'react';
 import Main from '../pages/Main.js';
 import Providers from '../pages/Providers.js';
 import Products from '../pages/Products.js';
+import Receipts from '../pages/Receipts.js';
 
 export default function App() {
   const [store, setStore] = useState("");
   const [provider, setProvider] = useState("");
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState([]);
   return (
    <>
    <GlobalStyle/>
@@ -30,7 +31,10 @@ export default function App() {
                                     </PrivatePage>}/> 
         <Route path="/products" element={ <PrivatePage>
                                     <Products/>
-                                    </PrivatePage>}/>                                                              
+                                    </PrivatePage>}/> 
+        <Route path="/receipts" element={ <PrivatePage>
+                                    <Receipts/>
+                                    </PrivatePage>}/>                                                                                           
       </Routes>
       </UserContext.Provider>
    </BrowserRouter>

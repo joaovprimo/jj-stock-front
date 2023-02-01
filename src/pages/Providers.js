@@ -9,14 +9,14 @@ import { ImSearch } from "react-icons/im";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 export default function Providers (){
-  const { provider, setProvider } = useContext(UserContext);
+  const { provider, setProvider, store } = useContext(UserContext);
   const [findProvider, setFindProvider] = useState("");
   const [modalOpened, setModalOpened] = useState(false);
   const [disableForm, setDisableForm] = useState(false);
   const [insertProvider, setInsertProvider] = useState({name:"", email:"", cnpj:""});
-
+  console.log(store)
   useEffect(()=>{
-      const promisse = getProvider();
+      const promisse = getProvider(store.id);
       promisse.then(
         (res)=> {
           setProvider(res.data);
@@ -298,7 +298,6 @@ margin-top:5px;
 display:flex;
 flex-direction:column;
 justify-content: space-around;
-
 `;
 
 const MenuInfo = styled.div`
