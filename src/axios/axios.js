@@ -50,6 +50,13 @@ async function getProducts(stock){
     return promise;
 }
 
+async function createProduct(stock, data){
+    console.log(stock)
+    const config = createHearders();
+    const promise = await axios.post(`${base_Url}/products/${stock}`, data, config);
+    return promise;
+}
+
 async function deleteProduct(id){
     const config = createHearders();
     const promise = await axios.delete(`${base_Url}/products/${id}`,config);
@@ -64,4 +71,4 @@ async function createEntry(stock, data){
 }
 
 
-export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry }
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry, createProduct }

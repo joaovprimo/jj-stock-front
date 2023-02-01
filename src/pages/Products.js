@@ -5,30 +5,121 @@ import Top from "../components/Top.js";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/context.js";
-import { getProducts } from "../axios/axios.js";
+import { getProducts, createProduct } from "../axios/axios.js";
 import ProductsInfo from "../components/ProductsInfo .js";
+import { RotatingLines } from 'react-loader-spinner';
 
 export default function Products(){
     const { product, setProduct, store } = useContext(UserContext);
-    const [modalOpened, setModalOpened] = useState(true);
+    const [modalOpened, setModalOpened] = useState(false);
     const [disableForm, setDisableForm] = useState(false);
-    const [insertProduct, setInsertProduct] = useState({name:"", color:"", description:"", fiscalNote:"", minimun:"", numberRef:"", provider:"", quantity:"", size:"", stock:store.stock });
-
+    const [insertProduct, setInsertProduct] = useState({name:"", color:"", description:"", minimun:"", numberRef:"", provider:"", quantity:"", size:"", stock:store.stock });
+    const [success, setSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+  console.log(modalOpened)
     useEffect(()=>{
         const promisse = getProducts(store.stock);
         promisse.then(
           (res)=> {
             setProduct(res.data);
             console.log(res.data);
+            setModalOpened(false);
           }
         ).catch((error)=>{
           console.log(error.message);
         });
     },[]);
 
+    function submitInsert(e){
+      e.preventDefault();
+    }
+
+    function desableSuc(){
+      setSuccess(false);
+    }
+
+    async function createProductt(){
+      setDisableForm(true);
+      setIsLoading(true);
+      try{  
+        await createProduct(store.stock, insertProduct);
+        setSuccess(true);
+        setTimeout(desableSuc,"5000");
+        setDisableForm(false);
+        setIsLoading(false);
+        setInsertProduct({ name:"", color:"", description:"", minimun:"", numberRef:"", provider:"", quantity:"", size:"", stock:store.stock })
+      }catch(error){
+        console.log(error.message);
+        setDisableForm(false);
+        setIsLoading(false);
+        setInsertProduct({ name:"", color:"", description:"", minimun:"", numberRef:"", provider:"", quantity:"", size:"", stock:store.stock })
+        alert("Não foi possível inserir esta entrada, verifique as informações");
+      }
+    }
+
     return(
-        <>      
+        <>  
+        {
+          modalOpened === true ? 
+          <>
           <Top/>
+          <Container2>
+            <Content>
+              <Provider> Produtos </Provider>
+              <Menu3>
+              <CreateForm onSubmit={submitInsert}>
+              <Provider2>Adicionar um produto</Provider2>
+                <>
+                {success === true ?
+                <>
+                <Success> Entrada inserida com sucesso </Success>
+                <Input type="text" placeholder="Nome do produto" value={insertProduct.name} onChange={event => setInsertProduct({...insertProduct, name: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Número de referência" value={insertProduct.numberRef} onChange={event => setInsertProduct({...insertProduct, numberRef: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="CNPJ do fornecedor" value={insertProduct.provider} onChange={event => setInsertProduct({...insertProduct, provider: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Quantidade mínima no estoque" value={insertProduct.minimun} onChange={event => setInsertProduct({...insertProduct, minimun: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Tamanho" value={insertProduct.size} onChange={event => setInsertProduct({...insertProduct, size: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Cor do produto" value={insertProduct.color} onChange={event => setInsertProduct({...insertProduct, color: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Descrição do Produto" value={insertProduct.description} onChange={event => setInsertProduct({...insertProduct, description: event.target.value})} disable={disableForm} required/>
+                </>
+                :
+                <>
+                <Input type="text" placeholder="Nome do produto" value={insertProduct.name} onChange={event => setInsertProduct({...insertProduct, name: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Número de referência" value={insertProduct.numberRef} onChange={event => setInsertProduct({...insertProduct, numberRef: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="CNPJ do fornecedor" value={insertProduct.provider} onChange={event => setInsertProduct({...insertProduct, provider: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Quantidade mínima no estoque" value={insertProduct.minimun} onChange={event => setInsertProduct({...insertProduct, minimun: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Tamanho" value={insertProduct.size} onChange={event => setInsertProduct({...insertProduct, size: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Cor do produto" value={insertProduct.color} onChange={event => setInsertProduct({...insertProduct, color: event.target.value})} disable={disableForm} required/>
+                <Input type="text" placeholder="Descrição do Produto" value={insertProduct.description} onChange={event => setInsertProduct({...insertProduct, description: event.target.value})} disable={disableForm} required/>
+                </>}
+                </>
+                {isLoading ===  true ? 
+                <>
+                <Icon>
+                <RotatingLines
+                strokeColor="#122E40"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="60"
+                visible={true}
+              />
+              </Icon>
+                </>
+                  :
+                  <>
+                <DivBut>
+                <Save type="submit" disable={disableForm} onClick={createProductt}><p>Salvar</p></Save>
+                <Cancel type="submit" disable={disableForm} onClick={()=>setModalOpened(false)}><p>Cancelar</p></Cancel>
+                </DivBut>
+                  </>
+                }
+                </CreateForm>
+              </Menu3>
+            </Content> 
+          </Container2>
+          </>
+          :
+          <>
+        <Top/>
         <Container2>
          <Content>
           <SubContent>
@@ -40,6 +131,7 @@ export default function Products(){
           </SubContent>
           <Menu2>
           <TopMenu>
+          <p><BsFillPlusCircleFill onClick={()=> setModalOpened(true)}/></p>
             <Topname><p>Name</p></Topname>
             <TopNumberRef><p>N° Ref</p></TopNumberRef>
             <TopSize><p>Tamanho</p></TopSize>
@@ -59,7 +151,7 @@ export default function Products(){
                 numberRef={info.numberRef}
                 size={info.size.name}
                 provider={info.provider.name}
-                fiscalNote={info.fiscalNote.number}
+                //fiscalNote={info.fiscalNote.number}
                 color={info.color}
                 quantity={info.quantity}
                 />
@@ -68,6 +160,8 @@ export default function Products(){
           </Menu2>
          </Content>
         </Container2>
+          </>
+        }    
           </>       
     );
 }
@@ -147,7 +241,8 @@ p{
 }
 `
 const Topname= styled.div`
-margin-left:95px;
+display:flex;
+justify-content:flex-start;
 p{  
     font-weight: 700;
     font-size: 20px;
@@ -211,3 +306,93 @@ p{
     color: #495D69;
 }
 `
+const Menu3 = styled.div`
+min-width: 1200px;
+min-height: 600px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius: 10px 10px 0px 0px;
+`;
+
+const Provider2 = styled.p`
+font-weight: 700;
+font-size: 32px;
+line-height: 38px;
+color: #122E40;
+margin-bottom:10px;
+text-align:center;
+`;
+
+const Success = styled.p`
+font-size:20px;
+color:#32CD32;
+margin-bottom:10px;
+`;
+const Input = styled.input`
+width:320px;
+height:50px;
+margin-bottom:15px;
+border-radius: 5px 5px 5px 5px;
+padding:10px;
+font-size:20px;
+`;
+const Icon = styled.div`
+margin-top:80px;
+`;
+const DivBut = styled.div`
+height:200px;
+margin-top:5px;
+display:flex;
+flex-direction:column;
+justify-content: space-around;
+`;
+
+const Cancel = styled.button`
+width:180px;
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius: 5px 5px 5px 5px;
+p{
+  font-size:22px;
+  text-align:center;
+}
+&:hover{
+  cursor: pointer;
+  background-color:#FF0000;
+  font-weight:700;
+}
+`;
+
+const Save = styled.button`
+width:180px;
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius: 5px 5px 5px 5px;
+p{
+  font-size:22px;
+  text-align:center;
+}
+&:hover{
+  cursor: pointer;
+  background-color:#32CD32;
+  font-weight:700;
+}
+`;
+const CreateForm = styled.form`
+width:400px;
+height:700px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+border-radius: 10px 10px 10px 10px;
+background-color:#FFFFFF;
+display:flex;
+flex-direction:column;
+align-items:center;
+p{
+  margin-top:10px;
+}
+`;

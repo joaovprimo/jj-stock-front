@@ -4,7 +4,7 @@ import { deleteProduct } from "../axios/axios.js";
 import { useContext } from "react";
 import UserContext from "../context/context.js";
 
-export default function ProductsInfo({id, name, numberRef, size, provider, fiscalNote, color, quantity}){
+export default function ProductsInfo({id, name, numberRef, size, provider,  color, quantity}){
   
   const { setProduct } = useContext(UserContext);
   async function deleteProd(){
@@ -25,7 +25,6 @@ export default function ProductsInfo({id, name, numberRef, size, provider, fisca
        <P2><p>{numberRef}</p></P2>
        <P3><p>{size}</p></P3>
        <P4><p>{provider}</p></P4>
-       <P6><p>{fiscalNote}</p></P6>
        <P7><p>{color}</p></P7>
        <P8><p>{quantity}</p></P8>
     </ProductsInfoss>
