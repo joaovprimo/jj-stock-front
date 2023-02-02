@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import Logo from "../assests/images/logo.jpeg";
+import Logo2 from "../assests/images/logo2.jpeg";
 
 export default function Top(){
     return (
         <>
         <TopPage>
         <LogoInfo>
-        <p>Logo</p>
+        <img src={Logo2} alt=""/>
         </LogoInfo>
         </TopPage>
         </>
@@ -23,7 +25,8 @@ justify-content:flex-start;
 
 const LogoInfo = styled.div`
 margin-left:100px;
-p{
-    font-size:25px;
+img{
+    width:120px;
+    height:95px;
 }
 `
