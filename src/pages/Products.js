@@ -136,7 +136,6 @@ export default function Products(){
             <TopNumberRef><p>N° Ref</p></TopNumberRef>
             <TopSize><p>Tamanho</p></TopSize>
             <TopProvider><p>Provider</p></TopProvider>
-            <TopFiscal><p>Nota Fiscal</p></TopFiscal>
             <TopColor><p>Cor</p></TopColor>
             <TopQuantity><p>Quantidade</p></TopQuantity>
           </TopMenu>

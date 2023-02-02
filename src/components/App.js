@@ -8,18 +8,20 @@ import Main from '../pages/Main.js';
 import Providers from '../pages/Providers.js';
 import Products from '../pages/Products.js';
 import Receipts from '../pages/Receipts.js';
+import Storage from '../pages/Storage.js';
 
 export default function App() {
   const [store, setStore] = useState("");
   const [provider, setProvider] = useState("");
   const [product, setProduct] = useState([]);
+  const [productsStore, setProductsStore] = useState([]);
   return (
    <>
    <GlobalStyle/>
    <BrowserRouter>
    <UserContext.Provider
    value={{
-    store, setStore, provider, setProvider, product, setProduct
+    store, setStore, provider, setProvider, product, setProduct, productsStore, setProductsStore
    }}>
       <Routes>
         <Route path="/" element={<LoginPage/>}/>
@@ -34,7 +36,10 @@ export default function App() {
                                     </PrivatePage>}/> 
         <Route path="/receipts" element={ <PrivatePage>
                                     <Receipts/>
-                                    </PrivatePage>}/>                                                                                           
+                                    </PrivatePage>}/>  
+        <Route path="/storage" element={ <PrivatePage>
+                                    <Storage/>
+                                    </PrivatePage>}/>                                                                                          
       </Routes>
       </UserContext.Provider>
    </BrowserRouter>

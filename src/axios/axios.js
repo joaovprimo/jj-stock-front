@@ -70,5 +70,11 @@ async function createEntry(stock, data){
     return promise;
 }
 
+async function getStorage(id){
+    const config = createHearders();
+    const promise = await axios.get(`${base_Url}/storage/${id}`, config);
+    return promise;
+}
 
-export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry, createProduct }
+
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry, createProduct, getStorage }
