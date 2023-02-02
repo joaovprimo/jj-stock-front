@@ -3,13 +3,14 @@ import Top from "../components/Top.js";
 import Container2 from "../components/Container2.js";
 import { useEffect, useContext, useState } from "react";
 import UserContext from "../context/context.js";
-import { getStorage } from "../axios/axios.js";
+import { getStorage, getProductBy } from "../axios/axios.js";
 import { ImSearch } from "react-icons/im";
 import ProductsStorageInfo  from "../components/ProductsStorageInfo.js";
 
 export default function Storage () {
     const { productsStore, setProductsStore, store } = useContext(UserContext);
-  console.log(productsStore);
+    const [findProduct, setFindProduct] = useState("");
+    
     useEffect(()=>{
         const promisse = getStorage(store.stock);
         promisse.then(
@@ -22,6 +23,20 @@ export default function Storage () {
         });
     },[]);
 
+    function submitSearch(e){
+      e.preventDefault();
+    }
+
+    async function findProductBy(){
+      try{
+        const productt = await getProductBy(store.stock,findProduct);
+        console.log(productt.data)
+        setProductsStore(productt.data);
+      }catch(error){
+        alert("Produto não encontrado");
+      }
+    }
+
 return(
     <>
     <Top/>
@@ -29,9 +44,9 @@ return(
          <Content>
           <SubContent>
             <Provider> Estoque </Provider>
-            <Search>
-              <Find type="text" placeholder='Nome do produto' required/>
-              <ImSearch/>
+            <Search onSubmit={submitSearch}>
+              <Find type="text" placeholder='Número do produto' onChange={event => setFindProduct(event.target.value)} required/>
+              <ImSearch onClick={findProductBy}/>
             </Search>
           </SubContent>
           <Menu2>

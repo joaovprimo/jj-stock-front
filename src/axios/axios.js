@@ -50,6 +50,13 @@ async function getProducts(stock){
     return promise;
 }
 
+async function getProductBy(stock, data){
+    console.log(stock, data)
+    const config = createHearders();
+    const promise = await axios.get(`${base_Url}/products/${stock}/findone?numberref=${data}`, config);
+    return promise;
+}
+
 async function createProduct(stock, data){
     console.log(stock)
     const config = createHearders();
@@ -76,5 +83,12 @@ async function getStorage(id){
     return promise;
 }
 
+async function createSell(stock, data){
+    console.log(stock)
+    const config = createHearders();
+    const promise = await axios.post(`${base_Url}/sell/${stock}`, data, config);
+    return promise;
+}
 
-export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry, createProduct, getStorage }
+
+export { postLogin, getProvider, getProviderBy, createProvider, deleteProvider, getProducts, deleteProduct, createEntry, createProduct, getStorage, createSell, getProductBy }

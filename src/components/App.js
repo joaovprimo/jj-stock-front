@@ -9,6 +9,7 @@ import Providers from '../pages/Providers.js';
 import Products from '../pages/Products.js';
 import Receipts from '../pages/Receipts.js';
 import Storage from '../pages/Storage.js';
+import Sell from '../pages/Sell.js';
 
 export default function App() {
   const [store, setStore] = useState("");
@@ -39,7 +40,10 @@ export default function App() {
                                     </PrivatePage>}/>  
         <Route path="/storage" element={ <PrivatePage>
                                     <Storage/>
-                                    </PrivatePage>}/>                                                                                          
+                                    </PrivatePage>}/> 
+        <Route path="/sell" element={ <PrivatePage>
+                                    <Sell/>
+                                    </PrivatePage>}/>                                                                                                                      
       </Routes>
       </UserContext.Provider>
    </BrowserRouter>

@@ -5,7 +5,7 @@ import Top from "../components/Top.js";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../context/context.js";
-import { getProducts, createProduct } from "../axios/axios.js";
+import { getProducts, createProduct, getProductBy } from "../axios/axios.js";
 import ProductsInfo from "../components/ProductsInfo .js";
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -16,6 +16,8 @@ export default function Products(){
     const [insertProduct, setInsertProduct] = useState({name:"", color:"", description:"", minimun:"", numberRef:"", provider:"", quantity:"", size:"", stock:store.stock });
     const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [findProduct, setFindProduct] = useState("");
+
   console.log(modalOpened)
     useEffect(()=>{
         const promisse = getProducts(store.stock);
@@ -29,6 +31,20 @@ export default function Products(){
           console.log(error.message);
         });
     },[]);
+
+    function submitSearch(e){
+      e.preventDefault();
+    }
+
+    async function findProductBy(){
+      try{
+        const productt = await getProductBy(store.stock,findProduct);
+        console.log(productt.data)
+        setProduct(productt.data);
+      }catch(error){
+        alert("Produto não encontrado");
+      }
+    }
 
     function submitInsert(e){
       e.preventDefault();
@@ -124,9 +140,9 @@ export default function Products(){
          <Content>
           <SubContent>
             <Provider> Produtos </Provider>
-            <Search>
-              <Find type="text" placeholder='Nome do produto' required/>
-              <ImSearch/>
+            <Search onSubmit={submitSearch}>
+              <Find  type="text" placeholder='Número do produto' onChange={event => setFindProduct(event.target.value)}  required/>
+              <ImSearch onClick={findProductBy}/>
             </Search>
           </SubContent>
           <Menu2>

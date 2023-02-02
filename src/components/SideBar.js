@@ -12,7 +12,7 @@ export default function SideBar(){
         <Button onClick={()=>navigate("/products")}> <ImBarcode/> <p>Produtos</p> </Button>
         <Button onClick={()=>navigate("/providers")}> <ImUsers/> <p>Fornecedores</p> </Button>
         <Button onClick={()=>navigate("/receipts")}> <ImTruck/> <p>Recebimentos</p> </Button>
-        <Button> <ImCoinDollar/> <p>Vendas</p> </Button>
+        <Button onClick={()=>navigate("/sell")}> <ImCoinDollar/> <p>Vendas</p> </Button>
         </BarSide>
         </>
     );
