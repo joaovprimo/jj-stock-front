@@ -45,29 +45,31 @@ width:10%;
 justify-content:space-evenly;
 `
 const P1 = styled.div`
-font-size:20px;
-width:30%;
-p{
-    margin-left:80px;
+ width:250px;
+p{  
+    margin-left:25px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P2 = styled.div`
-font-size:20px;
-width:15%;
-display:flex;
-p{
-    margin-left:130px;
+ width:250px;
+p{  
+    margin-left:10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
-
 `
 const P3 = styled.div`
-font-size:20px;
-width:45%;
-display:flex;
-p{
-  margin-left:180px;
+ width:250px;
+p{  
+    margin-left:10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
-
 `
 const P4 = styled.div`
 font-size:20px;

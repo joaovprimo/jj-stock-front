@@ -27,7 +27,6 @@ export default function Sell(){
         setDisableForm(true);
         setIsLoading(true);
         try{  
-          console.log(insertSell)
           await createSell(store.stock, insertSell);
           setSuccess(true);
           setTimeout(desableSuc,"5000");
@@ -98,26 +97,29 @@ export default function Sell(){
 }
 
 const Content = styled.div`
-margin-top:40px;
+margin-top:20px;
 width: 80%;
 height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
 `;
 const Provider = styled.p`
 font-weight: 700;
 font-size: 32px;
 line-height: 38px;
 color: #122E40;
-margin-bottom:50px;
-p{
-    text-align:center;
-}
+height:60px;
+width:100%;
+display:flex;
+justify-content:flex-start;
 `;
 const Provider2 = styled.p`
 font-weight: 700;
 font-size: 32px;
 line-height: 38px;
 color: #122E40;
-margin-bottom:10px;
+margin-bottom:30px;
 text-align:center;
 `;
 const Menu3 = styled.div`
@@ -130,7 +132,7 @@ border-radius: 10px 10px 0px 0px;
 `;
 const CreateForm = styled.form`
 width:400px;
-height:700px;
+height:600px;
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 border-radius: 10px 10px 10px 10px;
 background-color:#FFFFFF;
@@ -150,7 +152,7 @@ padding:10px;
 font-size:20px;
 `;
 const DivBut = styled.div`
-height:200px;
+height:150px;
 margin-top:5px;
 display:flex;
 flex-direction:column;
@@ -182,6 +184,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-radius: 5px 5px 5px 5px;
+margin-bottom:20px;
 p{
   font-size:22px;
   text-align:center;

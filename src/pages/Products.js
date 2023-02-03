@@ -18,7 +18,6 @@ export default function Products(){
     const [isLoading, setIsLoading] = useState(false);
     const [findProduct, setFindProduct] = useState("");
 
-  console.log(modalOpened)
     useEffect(()=>{
         const promisse = getProducts(store.stock);
         promisse.then(
@@ -81,7 +80,9 @@ export default function Products(){
           <Top/>
           <Container2>
             <Content>
-              <Provider> Produtos </Provider>
+              <DivProvider>
+              <Provider3> Produtos </Provider3>
+              </DivProvider>
               <Menu3>
               <CreateForm onSubmit={submitInsert}>
               <Provider2>Adicionar um produto</Provider2>
@@ -147,7 +148,9 @@ export default function Products(){
           </SubContent>
           <Menu2>
           <TopMenu>
-          <p><BsFillPlusCircleFill onClick={()=> setModalOpened(true)}/></p>
+          <OpenModal>
+            <BsFillPlusCircleFill onClick={()=> setModalOpened(true)}/>
+            </OpenModal>
             <Topname><p>Name</p></Topname>
             <TopNumberRef><p>N° Ref</p></TopNumberRef>
             <TopSize><p>Tamanho</p></TopSize>
@@ -166,7 +169,6 @@ export default function Products(){
                 numberRef={info.numberRef}
                 size={info.size.name}
                 provider={info.provider.name}
-                //fiscalNote={info.fiscalNote.number}
                 color={info.color}
                 quantity={info.quantity}
                 />
@@ -183,17 +185,24 @@ export default function Products(){
 
 const MenuInfo = styled.div`
 overflow-y:scroll;
-width:100%;
+width:160%;
 `
 
 const Content = styled.div`
-margin-top:40px;
+margin-top:20px;
 width: 80%;
 height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
 `;
 
 const SubContent = styled.div`
 display:flex;
+margin-top:15px;
+height:70px;
+margin-bottom:15px;
+overflow:hidden;
 `;
 
 const Provider = styled.p`
@@ -201,13 +210,16 @@ font-weight: 700;
 font-size: 32px;
 line-height: 38px;
 color: #122E40;
-margin-bottom:50px;
+height:60px;
+width:150px;
+display:flex;
+flex-direction:flex-start;
 `;
 
 const Search = styled.form`
-margin-left:1150px;
+margin-left:630px;
 font-size: 32px;
-width:250px;
+width:240px;
 height:50px;
 background-color:white;
 display:flex;
@@ -217,102 +229,101 @@ align-items:center;
 &:hover{
     cursor: pointer;
 }
+p{
+  display:flex;
+  justify-content:center;
+  font-size:25px;
+}
 `;
 
 const Find = styled.input`
 border:none;
 height:50px;
 font-size: 20px;
-width:200px;
+width:210px;
 padding:15px;
 `;
 
 const Menu2 = styled.div`
 background-color: #FFFFFE;
-min-width: 1200px;
-height: 600px;
+max-width: 95%;
+height: 100%;
 display:flex;
 flex-direction:column;
-align-items:space-around;
 align-items:flex-start;
-border-radius: 10px 10px 0px 0px;
+border-radius: 10px 10px 10px 10px;
+overflow-x:scroll;
 `
 const TopMenu = styled.div`
-width:100%;
+width:160%;
 height:105px;
 background-color: #E7EFF3;
 border-radius: 10px 10px 0px 0px;
 display:flex;
 align-items:center;
-justify-content:space-between;
 position:relative;
-p{
-  margin-left:35px;
-  font-size:40px;
+`
+const OpenModal = styled.div`
+margin-left:40px;
+ font-size:40px;
   color: #495D69;
   &:hover{
   cursor: pointer;
-}
-}
+  }
 `
 const Topname= styled.div`
-display:flex;
-justify-content:flex-start;
+ width:250px;
+ margin-left:60px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
 `
 const TopNumberRef= styled.div`
+ width:250px;
+ margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
 `
 const TopSize= styled.div`
+ width:250px;
+margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
 `
-
 const TopProvider= styled.div`
+width:250px;
+margin-left:20px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
-}
-`
-const TopFiscal= styled.div`
-p{  
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    color: #495D69;
-    
 }
 `
 const TopColor= styled.div`
+width:250px;
+margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-   
 }
 `
 const TopQuantity= styled.div`
+width:250px;
+margin-left:20px;
 p{  
     margin-right:15px;
     font-weight: 700;
@@ -332,7 +343,7 @@ border-radius: 10px 10px 0px 0px;
 
 const Provider2 = styled.p`
 font-weight: 700;
-font-size: 32px;
+font-size: 25px;
 line-height: 38px;
 color: #122E40;
 margin-bottom:10px;
@@ -346,7 +357,7 @@ margin-bottom:10px;
 `;
 const Input = styled.input`
 width:320px;
-height:50px;
+height:40px;
 margin-bottom:15px;
 border-radius: 5px 5px 5px 5px;
 padding:10px;
@@ -356,11 +367,10 @@ const Icon = styled.div`
 margin-top:80px;
 `;
 const DivBut = styled.div`
-height:200px;
+height:100px;
 margin-top:5px;
 display:flex;
 flex-direction:column;
-justify-content: space-around;
 `;
 
 const Cancel = styled.button`
@@ -370,6 +380,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-radius: 5px 5px 5px 5px;
+margin-top:15px;
 p{
   font-size:22px;
   text-align:center;
@@ -400,14 +411,28 @@ p{
 `;
 const CreateForm = styled.form`
 width:400px;
-height:700px;
+height:100%;
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 border-radius: 10px 10px 10px 10px;
 background-color:#FFFFFF;
 display:flex;
 flex-direction:column;
 align-items:center;
+margin-top:10px;
 p{
   margin-top:10px;
 }
+`;
+
+const DivProvider = styled.div`
+width:100%;
+`
+
+const Provider3 = styled.p`
+font-weight: 700;
+font-size: 32px;
+line-height: 38px;
+color: #122E40;
+height:60px;
+width:150px;
 `;

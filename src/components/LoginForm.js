@@ -4,11 +4,13 @@ import { postLogin } from '../axios/axios.js';
 import UserContext from '../context/context.js';
 import { RotatingLines } from 'react-loader-spinner';
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function LoginForm(){
     const [login, setLogin] = useState({ cnpj:"", password:""});
     const [disableForm, setDisableForm] = useState(false);
-    const [ failed, setFailed ] = useState(false);
+    const [failed, setFailed] = useState(false);
+    const [visible, setVisible] = useState(false);
     const { setStore } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ export default function LoginForm(){
           setFailed(true);
         }
     }
-
+    
     return(
         <>
         <SpaceLogin>
@@ -46,7 +48,20 @@ export default function LoginForm(){
             <></>
             }
             <Input type="text" placeholder='cpnj' onChange={event => setLogin({...login, cnpj: event.target.value})} disabled={disableForm} required />
+            {visible ? 
+            <>
+            <Hide>
             <Input type="text" placeholder='senha' onChange={event => setLogin({...login, password: event.target.value})} disabled={disableForm} required />
+            <p><FaEyeSlash onClick={()=> setVisible(false)}/></p>
+            </Hide>
+            </>
+          :
+            <>
+            <Hide>
+            <Input type="password" placeholder='senha' onChange={event => setLogin({...login, password: event.target.value})} disabled={disableForm} required />
+            <p><FaEye onClick={()=> setVisible(true)}/></p>
+            </Hide>
+            </>}
             </FormLogin>
             <Submit type="submit" disabled={disableForm} onClick={loginStore}>
               {
@@ -71,15 +86,15 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items: center;
-width:495px;
-height:380px;
+width:40%;
+height:40%;
 background-color:#F5F5F5;
 `
 const Form = styled.form`
 `
 
 const Input = styled.input`
-width: 367px;
+width: 100%;
 height: 50px;
 background-color: #E0E0E0;
 border-radius: 10px;
@@ -87,6 +102,7 @@ margin-bottom:20px;
 padding:15px;
 font-size: 20px;
 font-weight: 700;
+border-style:none;
 `
 
 const Login = styled.h1`
@@ -128,5 +144,15 @@ display: flex;
 align-items: flex-end;
 text-align: center;
 color: #F4F9FA;
+}
+`
+const Hide = styled.div`
+display:flex;
+width: 367px;
+height: 50px;
+p{
+  position:relative;
+  padding:12px;
+  color:black;
 }
 `

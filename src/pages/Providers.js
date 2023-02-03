@@ -63,10 +63,10 @@ export default function Providers (){
           <Top/>
           <Container2>
             <Content>
-              <Provider> Fornecedores </Provider>
+              <Provider3> Fornecedores </Provider3>
               <Menu3>
                 <CreateForm onSubmit={submitSearch}>
-                <Provider><p>Adicionar Fornecedor</p></Provider>
+                <Provider2><p>Adicionar Fornecedor</p></Provider2>
                 <Input type="text" placeholder="Nome" onChange={event => setInsertProvider({...insertProvider, name: event.target.value})} disable={disableForm} required/>
                 <Input type="text" placeholder="Email" onChange={event => setInsertProvider({...insertProvider, email: event.target.value})} disable={disableForm} required/>
                 <Input type="text" placeholder="CNPJ" onChange={event => setInsertProvider({...insertProvider, cnpj: event.target.value})} disable={disableForm} required/>
@@ -123,9 +123,12 @@ export default function Providers (){
 }
 
 const Content = styled.div`
-margin-top:40px;
+margin-top:20px;
 width: 80%;
 height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
 `
 
 const Provider = styled.p`
@@ -133,23 +136,44 @@ font-weight: 700;
 font-size: 32px;
 line-height: 38px;
 color: #122E40;
-margin-bottom:50px;
+height:60px;
+width:150px;
+display:flex;
+flex-direction:flex-start;
 `
+const Provider2 = styled.p`
+font-weight: 700;
+font-size: 25px;
+line-height: 38px;
+color: #122E40;
+margin-bottom:10px;
+text-align:center;
+margin-bottom:40px;
+`;
+const Provider3 = styled.p`
+font-weight: 700;
+font-size: 32px;
+line-height: 38px;
+color: #122E40;
+height:60px;
+width:100%;
+display:flex;
+justify-content:flex-start;
+`;
 
 const Menu2 = styled.div`
 background-color: #FFFFFE;
-min-width: 1200px;
-height: 600px;
+max-width: 95%;
+height: 70%;
 display:flex;
 flex-direction:column;
-align-items:space-around;
 align-items:flex-start;
-border-radius: 10px 10px 0px 0px;
+border-radius: 10px 10px 10px 10px;
 `
 
 const TopProviders = styled.div`
 width:100%;
-height:100px;
+height:105px;
 background-color: #E7EFF3;
 border-radius: 10px 10px 0px 0px;
 display:flex;
@@ -166,44 +190,48 @@ p{
 `
 
 const Topname = styled.div`
-
+ width:250px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    margin-left:155px;
+    margin-left:115px;
 }
 `
 
 const Topcnpj = styled.div`
-
+ width:250px;
+ margin-left:100px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    margin-left:463px;
 }
 `
-
 const Topemail = styled.div`
-
+ width:250px;
+ margin-left:100px;
 p{  
+  margin-left:32px;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    margin-left:230px;
 }
 `
 const SubContent = styled.div`
 display:flex;
+margin-top:15px;
+height:70px;
+margin-bottom:15px;
+overflow:hidden;
 `
 const Search = styled.form`
-margin-left:1110px;
+margin-left:600px;
 font-size: 32px;
-width:300px;
+width:240px;
 height:50px;
 background-color:white;
 display:flex;
@@ -212,6 +240,11 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 align-items:center;
 &:hover{
     cursor: pointer;
+}
+p{
+  display:flex;
+  justify-content:center;
+  font-size:25px;
 }
 `
 const Find = styled.input`
@@ -240,7 +273,7 @@ p{
 
 const Menu3 = styled.div`
 min-width: 1200px;
-min-height: 600px;
+min-height: 500px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -263,6 +296,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-radius: 5px 5px 5px 5px;
+margin-top:15px;
 p{
   font-size:22px;
   text-align:center;
@@ -281,6 +315,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-radius: 5px 5px 5px 5px;
+margin-top:15px;
 p{
   font-size:22px;
   text-align:center;
@@ -293,11 +328,10 @@ p{
 `;
 
 const DivBut = styled.div`
-height:200px;
+height:140px;
 margin-top:5px;
 display:flex;
 flex-direction:column;
-justify-content: space-around;
 `;
 
 const MenuInfo = styled.div`

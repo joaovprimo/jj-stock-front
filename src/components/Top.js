@@ -16,17 +16,19 @@ export default function Top(){
 
 const TopPage = styled.div`
 width:100vw;
-height:100px;
+height:90px;
 background-color: #4796BD;
 display:flex;
 align-items:center;
 justify-content:flex-start;
+position:relative;
+z-index:2;
 `
 
 const LogoInfo = styled.div`
 margin-left:100px;
 img{
-    width:120px;
-    height:95px;
+    width:115px;
+    height:90px;
 }
 `

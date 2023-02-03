@@ -46,13 +46,13 @@ return(
             <Provider> Estoque </Provider>
             <Search onSubmit={submitSearch}>
               <Find type="text" placeholder='Número do produto' onChange={event => setFindProduct(event.target.value)} required/>
-              <ImSearch onClick={findProductBy}/>
+              <p><ImSearch onClick={findProductBy}/></p>
             </Search>
           </SubContent>
           <Menu2>
           <TopMenu>
             <Topname><p>Name</p></Topname>
-            <TopNumberRef><p>N° Ref</p></TopNumberRef>
+            <TopNumberRef><p>N° Referencia</p></TopNumberRef>
             <TopSize><p>Tamanho</p></TopSize>
             <TopProvider><p>Provider</p></TopProvider>
             <TopColor><p>Cor</p></TopColor>
@@ -84,27 +84,34 @@ return(
 }
 
 const Content = styled.div`
-margin-top:40px;
+margin-top:20px;
 width: 80%;
 height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
 `;
-
 const SubContent = styled.div`
 display:flex;
+margin-top:15px;
+height:70px;
+margin-bottom:15px;
+overflow:hidden;
 `;
-
 const Provider = styled.p`
 font-weight: 700;
 font-size: 32px;
 line-height: 38px;
 color: #122E40;
-margin-bottom:50px;
+height:60px;
+width:150px;
+display:flex;
+flex-direction:flex-start;
 `;
-
 const Search = styled.form`
-margin-left:1150px;
+margin-left:600px;
 font-size: 32px;
-width:250px;
+width:240px;
 height:50px;
 background-color:white;
 display:flex;
@@ -114,84 +121,81 @@ align-items:center;
 &:hover{
     cursor: pointer;
 }
+p{
+  display:flex;
+  justify-content:center;
+  font-size:25px;
+}
 `;
-
 const Find = styled.input`
 border:none;
 height:50px;
 font-size: 20px;
-width:200px;
+width:210px;
 padding:15px;
 `;
-
 const Menu2 = styled.div`
 background-color: #FFFFFE;
-min-width: 1200px;
-height: 600px;
+max-width: 95%;
+height: 100%;
 display:flex;
 flex-direction:column;
-align-items:space-around;
 align-items:flex-start;
-border-radius: 10px 10px 0px 0px;
-`
+border-radius: 10px 10px 10px 10px;
+overflow-x:scroll;
+`;
 const TopMenu = styled.div`
-width:100%;
+width:160%;
 height:105px;
 background-color: #E7EFF3;
 border-radius: 10px 10px 0px 0px;
 display:flex;
 align-items:center;
-justify-content:space-between;
 position:relative;
-p{
-  margin-left:35px;
-  font-size:40px;
-  color: #495D69;
-  &:hover{
-  cursor: pointer;
-}
-}
-`
+`;
 const Topname= styled.div`
-display:flex;
-justify-content:flex-start;
+ width:250px;
+ margin-left:40px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
-`
+`;
 const TopNumberRef= styled.div`
+ width:250px;
+ margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
-`
+`;
 const TopSize= styled.div`
+ width:250px;
+margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
-`
-
+`;
 const TopProvider= styled.div`
+width:250px;
+margin-left:20px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-    
 }
-`
+`;
 const TopMinimun= styled.div`
+width:250px;
+margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
@@ -199,17 +203,20 @@ p{
     color: #495D69;
     
 }
-`
+`;
 const TopColor= styled.div`
+width:250px;
+margin-left:30px;
 p{  
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #495D69;
-   
 }
-`
+`;
 const TopQuantity= styled.div`
+width:250px;
+margin-left:20px;
 p{  
     margin-right:15px;
     font-weight: 700;
@@ -217,8 +224,8 @@ p{
     line-height: 24px;
     color: #495D69;
 }
-`
+`;
 const MenuInfo = styled.div`
 overflow-y:scroll;
-width:100%;
-`
+width:160%;
+`;

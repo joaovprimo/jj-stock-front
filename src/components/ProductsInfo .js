@@ -25,8 +25,8 @@ export default function ProductsInfo({id, name, numberRef, size, provider,  colo
        <P2><p>{numberRef}</p></P2>
        <P3><p>{size}</p></P3>
        <P4><p>{provider}</p></P4>
-       <P7><p>{color}</p></P7>
-       <P8><p>{quantity}</p></P8>
+       <P6><p>{color}</p></P6>
+       <P7><p>{quantity}</p></P7>
     </ProductsInfoss>
     </>
 )
@@ -39,39 +39,51 @@ border-bottom:solid transparent;
 box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 display:flex;
 align-items:center;
-
 box-sizing:border-box;
+font-size:20px;
 `
 const Icons = styled.div`
 width:5%;
 margin-left:50px;
 `
 const P1 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:0px;
+ width:250px;
+p{  
+    width:80%;
+    margin-left:8px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P2 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:50px;
+ width:250px;
+p{  
+    width:80%;
+    margin-left:15px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P3 = styled.div`
-font-size:20px;
-width:3%;
-p{
-    margin-left:130px;
+width:250px;
+p{  
+    width:80%;
+    margin-left:40px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P4 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:270px;
+width:250px;
+p{  
+    width:80%;
+    margin-left:33px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P5 = styled.div`
@@ -81,23 +93,24 @@ font-size:20px;
 }
 `
 const P6 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:360px;
+width:250px;
+p{  
+    width:80%;
+    margin-left:45px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 `
 const P7 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:440px;
-}
-`
-const P8 = styled.div`
-font-size:20px;
-width:10%;
-p{
-    margin-left:530px;
+width:250px;
+display:flex;
+justify-content:center;
+p{  
+    margin-right:50px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #495D69;
 }
 `

@@ -21,7 +21,7 @@ export default function LoginPage(){
 }
 
 const Img = styled.img`
-width:495px;
-height:380px;
+width:30%;
+height:30%;
 `
 

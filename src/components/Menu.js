@@ -12,8 +12,8 @@ export default function Menu(props){
 
 const MenuPage = styled.div`
 background-color: #FFFFFE;
-min-width: 1200px;
-min-height: 600px;
+min-width: 90%;
+min-height: 80%;
 display:flex;
 align-items: center;
 justify-content:space-around;
